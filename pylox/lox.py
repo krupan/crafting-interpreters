@@ -16,6 +16,22 @@ class Scanner:
     def scan_tokens(self):
         return []
 
+# TODO: maybe make an error reporter class to contain this an the next
+# two functions
+had_error = False
+
+# TODO: make the error output match gcc's style:
+#
+#     filename:line:column: message
+#
+def report(line_no, where, message):
+    print(f"[line {line}] Error {where}: {message}")
+    had_error = True
+
+
+def error(line_no, message):
+    report(line_no, "", message)
+
 
 def run(source):
     scanner = Scanner(source)
@@ -33,11 +49,15 @@ def run_prompt():
         except EOFError:
             break
         run(line)
+        had_error = False
 
 
 def run_file(path):
     try:
         run(open(path).read())
+        if had_error:
+            return 65
+        return 0
     except FileNotFoundError:
         print(f'file not found: {path}')
         return -1
