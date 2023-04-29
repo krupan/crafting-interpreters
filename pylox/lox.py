@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import sys
+from dataclasses import dataclass
 
 
 def parse_args():
@@ -9,9 +10,9 @@ def parse_args():
     return parser.parse_args()
 
 
+@dataclass
 class Scanner:
-    def __init__(self, source):
-        self.source = source
+    source: str
 
     def scan_tokens(self):
         return []
