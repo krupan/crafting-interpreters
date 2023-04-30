@@ -1,0 +1,3 @@
+* Crafting Interpreters - Lox
+
+Code I'm writing while going through [[https://craftinginterpreters.com/][the Crafting Interpreters book]].
