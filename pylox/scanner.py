@@ -14,29 +14,33 @@ class Scanner:
     line: int = field(default=1, init=False, repr=False)
 
     def scan_tokens(self):
-        while not is_at_end():
-            start = current
-            scan_token()
-        tokens.append(Token(TokenType.EOF, "", None, line))
-        return tokens
+        while not self.is_at_end():
+            self.start = self.current
+            self.scan_token()
+        self.tokens.append(Token(TokenType.EOF, "", None, self.line))
+        return self.tokens
 
     def scan_token(self):
-        c = advance()
+        c = self.advance()
         match c:
-            case: '(': self.add_token(TokenType.LEFT_PAREN)
-            case: ')': self.add_token(TokenType.RIGH_PAREN)
-            case: '{': self.add_token(TokenType.LEFT_BRACE)
-            case: '}': self.add_token(TokenType.RIGHT_BRACE_)
-            case: ',': self.add_token(TokenType.COMMA)
-            case: '.': self.add_token(TokenType.DOT)
-            case: '-': self.add_token(TokenType.MINUS)
-            case: '+': self.add_token(TokenType.PLUS)
-            case: ';': self.add_token(TokenType.SEMICOLON)
-            case: '*': self.add_token(TokenType.STAR)
+            case '(': self.add_token(TokenType.LEFT_PAREN)
+            case ')': self.add_token(TokenType.RIGHT_PAREN)
+            case '{': self.add_token(TokenType.LEFT_BRACE)
+            case '}': self.add_token(TokenType.RIGHT_BRACE)
+            case ',': self.add_token(TokenType.COMMA)
+            case '.': self.add_token(TokenType.DOT)
+            case '-': self.add_token(TokenType.MINUS)
+            case '+': self.add_token(TokenType.PLUS)
+            case ';': self.add_token(TokenType.SEMICOLON)
+            case '*': self.add_token(TokenType.STAR)
 
+    def advance(self):
+        self.current += 1
+        return self.source[self.current]
 
-    def advance(
-    def add_token(self, token):
-        
+    def add_token(self, token, literal=None):
+        text = self.source[self.start:self.current]
+        self.tokens.append(Token(token, text, literal, self.line))
+
     def is_at_end(self):
         return self.current >= len(self.source)

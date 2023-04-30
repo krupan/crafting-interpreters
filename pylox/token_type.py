@@ -7,7 +7,7 @@ class TokenType(Enum):
     # single character tokens
     LEFT_PAREN = auto()
     RIGHT_PAREN = auto()
-    left_brace = auto()
+    LEFT_BRACE = auto()
     RIGHT_BRACE = auto()
     COMMA = auto()
     DOT = auto()
